@@ -1,12 +1,5 @@
-import java.awt.Color;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.script.ScriptException;
 import javax.sound.sampled.LineUnavailableException;
@@ -16,15 +9,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
-import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.html.HtmlListItem;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 
 import java.util.Calendar;
