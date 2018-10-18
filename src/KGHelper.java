@@ -15,6 +15,7 @@ public class KGHelper {
 	private final static String NAME_PROPERTY = "http://projetobianca.com/name";
 	private final static String BIRTHDATE_PROPERTY = "http://projetobianca.com/birthdate";
 	private final static String NEWLINE = System.getProperty("line.separator");
+	private final static String FILENAME = "triples.txt";
 	
 	public static String generateURI (String id) {
 		return NAMESPACE+id;
@@ -55,7 +56,7 @@ public class KGHelper {
         try {
 
             //create a temporary file
-        	String timeLog = "triples.txt";
+        	String timeLog = FILENAME;
             File logFile = new File(timeLog);
             // This will output the full path where the file will be written to...
             System.out.println(logFile.getCanonicalPath());

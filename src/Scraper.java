@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.script.ScriptException;
 import javax.sound.sampled.LineUnavailableException;
@@ -14,15 +15,21 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 public class Scraper {
 
+	private final static String URL_STRING = "http://www.stj.jus.br/web/verMinistrosSTJ?parametro=1";
+	private static String PARAMETRO = "";
 
 	public static void main(String[] args){		
-	    // turn off htmlunit warnings
+	    // turns off htmlunit warnings
 	    java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
 	    java.util.logging.Logger.getLogger("org.apache.http").setLevel(java.util.logging.Level.OFF);
+	    
 		try {
+			// gets variable parametro from query string
+			PARAMETRO = Helper.getParameterFromQueryString(URL_STRING);
 			startScraping();
 		} catch (FailingHttpStatusCodeException | IOException | ScriptException | InterruptedException
 				| LineUnavailableException e) {
@@ -37,7 +44,7 @@ public class Scraper {
 			StringBuffer triples = new StringBuffer();
 			
 			// Get minister list page
-			final HtmlPage ministersPage = webClient.getPage("http://www.stj.jus.br/web/verMinistrosSTJ?parametro=1");
+			final HtmlPage ministersPage = webClient.getPage(URL_STRING);
 			List<HtmlSpan> nodes = ministersPage.getByXPath("//*[@class=\"clsMinistrosNome\"]");
 			// First item is table header
 			nodes.remove(0);
@@ -49,7 +56,8 @@ public class Scraper {
 				// gets minister's id
 				HtmlAnchor anchor = (HtmlAnchor) node.getFirstChild();
 				String url = anchor.getAttribute("href");
-				String id = url.replace("verCurriculoMinistro?parametro=1&cod_matriculamin=", "");
+				String auxStr = "verCurriculoMinistro?parametro=" + PARAMETRO + "&cod_matriculamin=";
+				String id = url.replace(auxStr, "");
 				String uri = KGHelper.generateURI(id);
 				
 				// now, we need to go to each minister's page to get his/her birth date

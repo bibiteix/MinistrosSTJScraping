@@ -1,9 +1,33 @@
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Helper {
+	
+	private static Map<String, String> getQueryMap(String query)  
+	{  
+	    String[] params = query.split("&");  
+	    Map<String, String> map = new HashMap<String, String>();  
+	    for (String param : params)  
+	    {  
+	        String name = param.split("=")[0];  
+	        String value = param.split("=")[1];  
+	        map.put(name, value);  
+	    }  
+	    return map;  
+	}
+	
+	public static String getParameterFromQueryString(String urlString) throws MalformedURLException {
+		URL url = new URL(urlString);
+	    Map<String, String> map = Helper.getQueryMap(url.getQuery());
+	    return map.get("parametro");
+	}
+
 	
 	public static String convertCalendarToString(Calendar birthdate) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
